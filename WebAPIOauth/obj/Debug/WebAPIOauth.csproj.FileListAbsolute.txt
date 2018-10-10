@@ -115,6 +115,7 @@ D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\Micr
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\Microsoft.AI.WindowsServer.xml
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\Microsoft.AI.Web.xml
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Debug\WebAPIOauth.csprojAssemblyReference.cache
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Debug\WebAPIOauth.csproj.CoreCompileInputs.cache
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Debug\WebAPIOauth.csproj.CopyComplete
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Debug\WebAPIOauth.dll

@@ -58,7 +58,7 @@ namespace WebAPIOauth
                 string passwordVal = context.Password;
 
                 // Verification.  
-                if (context.UserName != "mohan" || context.Password != "harman")
+                if (context.UserName != "username" || context.Password != "password")
                 {
                     // Settings.  
                     context.SetError("invalid_grant", "The user name or password is incorrect.");
