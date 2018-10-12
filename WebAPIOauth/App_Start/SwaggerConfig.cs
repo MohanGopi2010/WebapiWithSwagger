@@ -8,62 +8,90 @@ using Swashbuckle.Swagger;
 using System.Linq;
 using System.Collections.Generic;
 using System.Web.Http.Routing.Constraints;
+using System.Web.Http.Filters;
+using System.Net.Http;
 
-[assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
+//[assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
 namespace WebAPIOauth
 {
     public class SwaggerConfig
     {
-        public static void Register()
+        public static void Register(HttpConfiguration config)
         {
-            var thisAssembly = typeof(SwaggerConfig).Assembly;
+            //var thisAssembly = typeof(SwaggerConfig).Assembly;
 
-            GlobalConfiguration.Configuration
-                .EnableSwagger(c =>
-                    {
-                        c.SingleApiVersion("v1", "Web Api With Swagger");
-                        c.PrettyPrint();
+            var apiExplorer = config.AddVersionedApiExplorer(
+                options =>
+                {
+                    options.GroupNameFormat = "'v'VVV";
+                    // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
+                    // can also be used to control the format of the API version in route templates
+                    options.SubstituteApiVersionInUrl = true;
+                });
 
-                        //c.MultipleApiVersions(
-                        //    (apiDesc, targetApiVersion) => ResolveVersionSupportByRouteConstraint(apiDesc, targetApiVersion),
-                        //    (vc) =>
-                        //    {
-                        //        vc.Version("v1", "Swashbuckle Dummy API V1");
-                        //        vc.Version("v2", "Swashbuckle Dummy API V2");
-                        //    });
+            //System.Diagnostics.Debugger.Break();
 
-                        c.OAuth2("oauth2")
-                        .Description("OAuth2 Password Grant")
-                            .Flow("password")
-                         .TokenUrl("http://localhost:65371/token");
+            //var baseURL = UriPartial.Authority;
 
-                        c.IncludeXmlComments(GetXmlCommentsPath());
+            config
 
-                        c.DescribeAllEnumsAsStrings();
+                .EnableSwagger("{apiVersion}/swagger", c =>
+                  {
+                      c.RootUrl(req =>
+         req.RequestUri.GetLeftPart(UriPartial.Authority) +
+         req.GetRequestContext().VirtualPathRoot.TrimEnd('/'));
+
+                      //c.SingleApiVersion("v1", "Web Api With Swagger");
+                      c.PrettyPrint();
+
+                      c.MultipleApiVersions(
+                                  (apiDescription, version) => apiDescription.GetGroupName() == version,
+                                  info =>
+                                  {
+                                      foreach (var group in apiExplorer.ApiDescriptions)
+                                      {
+                                          var description = "A sample application with Swagger, Swashbuckle, and API versioning.";
+
+                                          if (group.IsDeprecated)
+                                          {
+                                              description += " This API version has been deprecated.";
+                                          }
+                                          info.Version(group.Name, $"Sample API {group.ApiVersion}")
+                                              .Contact(_contact => _contact.Name("Harman").Email("Harman@.com"))
+                                              .Description(description)
+                                              .TermsOfService("Terms of condition");
+                                      }
+                                  });
 
 
-                        c.OperationFilter<AssignOAuth2SecurityRequirements>();
+                      c.OAuth2("oauth2")
+                      .Description("OAuth2 Password Grant")
+                          .Flow("password")
+                       .TokenUrl("http://localhost:65371/token");
 
-                        //c.DocumentFilter<AuthTokenOperation>();
+                      c.IncludeXmlComments(GetXmlCommentsPath());
 
-                    })
+                      c.DescribeAllEnumsAsStrings();
+
+
+                      c.OperationFilter<AssignOAuth2SecurityRequirements>();
+                       
+                  })
                 .EnableSwaggerUi(c =>
-                    {
-                        // Use the "DocumentTitle" option to change the Document title.
-                        // Very helpful when you have multiple Swagger pages open, to tell them apart.
-                        //
+                    { 
                         c.DocumentTitle("My Swagger UI");
+                        c.DocExpansion(DocExpansion.Full); 
+                       
+                        //  c.InjectJavaScript(thisAssembly, "WebAPIOauth.swaggerext.onComplete.js");
 
-                        c.InjectJavaScript(thisAssembly, "WebAPIOauth.swaggerext.onComplete.js");
-
-                        c.EnableOAuth2Support(
-                            clientId: "client_id",
-                            clientSecret: null,
-                            realm: "test-realm",
-                            appName: "Swagger UI"
-                        //additionalQueryStringParams: new Dictionary<string, string>() { { "foo", "bar" } }
-                        );
+                        //c.EnableOAuth2Support(
+                        //    clientId: "client_id",
+                        //    clientSecret: null,
+                        //    realm: "test-realm",
+                        //    appName: "Swagger UI"
+                        ////additionalQueryStringParams: new Dictionary<string, string>() { { "foo", "bar" } }
+                        //);
                         c.EnableDiscoveryUrlSelector();
 
                     });
@@ -71,71 +99,12 @@ namespace WebAPIOauth
 
 
 
-        public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
-        {
-            var versionConstraint = (apiDesc.Route.Constraints.ContainsKey("apiVersion"))
-                ? apiDesc.Route.Constraints["apiVersion"] as RegexRouteConstraint
-                : null;
-
-            return (versionConstraint == null)
-                ? false
-                : versionConstraint.Pattern.Split('|').Contains(targetApiVersion);
-        }
-
+    
         private static string GetXmlCommentsPath()
         {
             return string.Format(@"{0}\bin\WebAPIOauth.xml", AppDomain.CurrentDomain.BaseDirectory);
         }
-    }
-
-    public class AuthTokenOperation : IDocumentFilter
-    {
-        /// <summary>
-        /// Apply custom operation.
-        /// </summary>
-        /// <param name="swaggerDoc">The swagger document.</param>
-        /// <param name="schemaRegistry">The schema registry.</param>
-        /// <param name="apiExplorer">The api explorer.</param>
-        public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
-        {
-            swaggerDoc.paths.Add("/token", new PathItem
-            {
-                post = new Operation
-                {
-                    tags = new List<string> { "Auth" },
-                    consumes = new List<string>
-                    {
-                        "application/x-www-form-urlencoded"
-                    },
-                    parameters = new List<Parameter>
-                    {
-                        new Parameter
-                        {
-                            type = "string",
-                            name = "grant_type",
-                            required = true,
-                            @in = "formData"
-                        },
-                        new Parameter
-                        {
-                            type = "string",
-                            name = "username",
-                            required = false,
-                            @in = "formData"
-                        },
-                        new Parameter
-                        {
-                            type = "string",
-                            name = "password",
-                            required = false,
-                            @in = "formData"
-                        },
-                    }
-                }
-            });
-        }
-
-    }
+    } 
 
     internal class AssignOAuth2SecurityRequirements : IOperationFilter
     {
@@ -143,25 +112,31 @@ namespace WebAPIOauth
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
             //Adding Versioning 
-
-            if (operation.parameters != null)
+            if (operation != null)
             {
-                foreach (var parameter in operation.parameters)
+
+                if (operation.parameters != null)
+
                 {
-                    var description = apiDescription.ParameterDescriptions
-                                                    .First(p => p.Name == parameter.name);
-
-                    if (parameter.description == null)
+                    foreach (var parameter in operation.parameters)
                     {
-                        parameter.description = description.Documentation;
-                    }
+                        var description = apiDescription.ParameterDescriptions
+                                                        .First(p => p.Name == parameter.name);
 
-                    if (parameter.@default == null)
-                    {
-                        parameter.@default = description.ParameterDescriptor?.DefaultValue;
+                        if (parameter.description == null)
+                        {
+                            parameter.description = description.Documentation;
+                        }
+
+                        if (parameter.@default == null)
+                        {
+                            parameter.@default = description.ParameterDescriptor?.DefaultValue;
+                        }
                     }
                 }
             }
+
+
 
 
             // Determine if the operation has the Authorize attribute

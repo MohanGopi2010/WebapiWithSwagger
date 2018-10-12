@@ -9,11 +9,11 @@ using System.Web.Http.Description;
 
 namespace WebAPIOauth.Controllers
 {
-    [ApiVersion("1.0")]
+    [ApiVersion("1.0", Deprecated = true)]
     [ApiVersion("2.0")]
     [ApiVersion("3.0")]
     [RoutePrefix("api/v{version:apiVersion}/values")]
-   
+
     public class ValuesController : ApiController
     {
 
@@ -21,7 +21,7 @@ namespace WebAPIOauth.Controllers
         [Route("")]
         [HttpGet]
         [ResponseType(typeof(string[]))]
-        [Authorize] 
+        [Authorize]
         public IEnumerable<string> Get()
         {
 
@@ -79,7 +79,7 @@ namespace WebAPIOauth.Controllers
 
         [Route("getuser")]
 
-        [ResponseType(typeof(string))] 
+        [ResponseType(typeof(string))]
         public string GetUser()
         {
             return "version 1";

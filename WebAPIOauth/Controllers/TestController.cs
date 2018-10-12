@@ -7,10 +7,11 @@ using System.Web.Http;
 
 namespace WebAPIOauth.Controllers
 {
-    [Authorize ]
     public class TestController : ApiController
     {
         // GET: api/Test
+
+        [Authorize]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

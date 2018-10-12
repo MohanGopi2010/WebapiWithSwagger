@@ -17,11 +17,16 @@ namespace WebAPIOauth.App_Start
         {
             HttpConfiguration config = new HttpConfiguration();
 
-            WebApiConfig.Register(config);
            
-            // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
+            ConfigConfigureOAuth(app);
 
-            // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
+            WebApiConfig.Register(config); 
+            app.UseWebApi(config);
+
+        }
+
+        void ConfigConfigureOAuth(IAppBuilder app)
+        {
             PublicClientId = "self";
             OAuthAuthorizationServerOptions OAuthOptions = new OAuthAuthorizationServerOptions
             {
@@ -36,10 +41,8 @@ namespace WebAPIOauth.App_Start
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthAuthorizationServer(OAuthOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-
-           
-            app.UseWebApi(config);
-
         }
     }
+
+
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Web.Http.Routing;
 using Microsoft.Web.Http.Versioning;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Routing;
 
 namespace WebAPIOauth
@@ -12,7 +13,8 @@ namespace WebAPIOauth
             // Web API configuration and services
 
             // Web API routes
-
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
 
             var constraintResolver = new DefaultInlineConstraintResolver()
             {
@@ -46,8 +48,8 @@ namespace WebAPIOauth
 
 
             config.MapHttpAttributeRoutes(constraintResolver);
+             
 
-            
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",
@@ -56,6 +58,8 @@ namespace WebAPIOauth
                     id = RouteParameter.Optional
                 }
             );
+
+            SwaggerConfig.Register(config);
 
         } 
     }

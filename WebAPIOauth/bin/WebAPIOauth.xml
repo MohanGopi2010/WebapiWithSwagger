@@ -50,14 +50,6 @@
             <param name="userName">User name parameter</param>  
             <returns>Returns authenticated properties.</returns>  
         </member>
-        <member name="M:WebAPIOauth.AuthTokenOperation.Apply(Swashbuckle.Swagger.SwaggerDocument,Swashbuckle.Swagger.SchemaRegistry,System.Web.Http.Description.IApiExplorer)">
-            <summary>
-            Apply custom operation.
-            </summary>
-            <param name="swaggerDoc">The swagger document.</param>
-            <param name="schemaRegistry">The schema registry.</param>
-            <param name="apiExplorer">The api explorer.</param>
-        </member>
         <member name="M:WebAPIOauth.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
             Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"

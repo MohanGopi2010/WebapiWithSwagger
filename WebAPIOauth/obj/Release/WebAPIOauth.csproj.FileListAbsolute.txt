@@ -1,7 +1,6 @@
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\ApplicationInsights.config
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\swagger\onComplete.js
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\WebAPIOauth.dll.config
-D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\WebAPIOauth.xml
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\WebAPIOauth.dll
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\WebAPIOauth.pdb
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\roslyn\csc.exe
@@ -120,8 +119,7 @@ D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\Micr
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\Microsoft.AI.WindowsServer.xml
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\Microsoft.AI.Web.xml
 D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Debug\WebAPIOauth.csprojAssemblyReference.cache
-D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Debug\WebAPIOauth.csproj.CoreCompileInputs.cache
-D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Debug\WebAPIOauth.csproj.CopyComplete
-D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Debug\WebAPIOauth.dll
-D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Debug\WebAPIOauth.pdb
+D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Release\WebAPIOauth.csproj.CoreCompileInputs.cache
+D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Release\WebAPIOauth.csproj.CopyComplete
+D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Release\WebAPIOauth.dll
+D:\SampleProjects\CoreAPIWithDocker\WebAPIOAUTH\WebAPIOauth\WebAPIOauth\obj\Release\WebAPIOauth.pdb

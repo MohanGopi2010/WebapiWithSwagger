@@ -1,0 +1,678 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.AspNet.WebApi.Versioning.ApiExplorer</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Web.Http.Description.ApiDescriptionComparer">
+            <summary>
+            Represents an object that compares <see cref="T:System.Web.Http.Description.ApiDescription">API Descriptions</see><seealso cref="T:Microsoft.Web.Http.Description.VersionedApiDescription"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiDescriptionComparer.Equals(Microsoft.Web.Http.Description.VersionedApiDescription,Microsoft.Web.Http.Description.VersionedApiDescription)">
+            <summary>
+            Determines whether the two <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API descriptions</see> are equal.
+            </summary>
+            <param name="x">The <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API descriptions</see> to compare.</param>
+            <param name="y">The <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API descriptions</see> to compare against.</param>
+            <returns>True if the two API descriptions are equal; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiDescriptionComparer.GetHashCode(Microsoft.Web.Http.Description.VersionedApiDescription)">
+            <summary>
+            Returns a hash code for the especified <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API description</see>.
+            </summary>
+            <param name="obj">The object to get a hash code for.</param>
+            <returns>The hash code of the specified object.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiDescriptionComparer.Equals(System.Web.Http.Description.ApiDescription,System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Determines whether the two <see cref="T:System.Web.Http.Description.ApiDescription">API descriptions</see> are equal.
+            </summary>
+            <param name="x">The <see cref="T:System.Web.Http.Description.ApiDescription">API descriptions</see> to compare.</param>
+            <param name="y">The <see cref="T:System.Web.Http.Description.ApiDescription">API descriptions</see> to compare against.</param>
+            <returns>True if the two API descriptions are equal; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiDescriptionComparer.GetHashCode(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Returns a hash code for the especified <see cref="T:System.Web.Http.Description.ApiDescription">API description</see>.
+            </summary>
+            <param name="obj">The object to get a hash code for.</param>
+            <returns>The hash code of the specified object.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiDescriptionComparer.Compare(Microsoft.Web.Http.Description.VersionedApiDescription,Microsoft.Web.Http.Description.VersionedApiDescription)">
+            <summary>
+            Compares two <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API descriptions</see>.
+            </summary>
+            <param name="x">The <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API descriptions</see> to compare.</param>
+            <param name="y">The <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API descriptions</see> to compare against.</param>
+            <returns>0 if the objects are equal, 1 if <paramref name="x"/> is greater than <paramref name="y"/>,
+            or -1 if <paramref name="x"/> is less than <paramref name="y"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiDescriptionComparer.Compare(System.Web.Http.Description.ApiDescription,System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Compares two <see cref="T:System.Web.Http.Description.ApiDescription">API descriptions</see>.
+            </summary>
+            <param name="x">The <see cref="T:System.Web.Http.Description.ApiDescription">API descriptions</see> to compare.</param>
+            <param name="y">The <see cref="T:System.Web.Http.Description.ApiDescription">API descriptions</see> to compare against.</param>
+            <returns>0 if the objects are equal, 1 if <paramref name="x"/> is greater than <paramref name="y"/>,
+            or -1 if <paramref name="x"/> is less than <paramref name="y"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Web.Http.Description.ApiDescriptionGroup">
+            <summary>
+            Represents a group of versioned API descriptions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiDescriptionGroup.#ctor(Microsoft.Web.Http.ApiVersion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Web.Http.Description.ApiDescriptionGroup"/> class.
+            </summary>
+            <param name="apiVersion">The <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see> associated with the group.</param>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiDescriptionGroup.ApiVersion">
+            <summary>
+            Gets the version associated with the group of APIs.
+            </summary>
+            <value>An <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiDescriptionGroup.Name">
+            <summary>
+            Gets or sets the name of the API description group.
+            </summary>
+            <value>The API version description group name.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiDescriptionGroup.IsDeprecated">
+            <summary>
+            Gets a value indicating whether API version is deprecated for all described APIs in the group.
+            </summary>
+            <value>True if all APIs in the group are deprecated; otherwise, false.</value>
+            <remarks>An API version will only be described as deprecated when all
+            all corresponding service implementations are also deprecated. It is
+            possible that some API versions may be partially deprecated, in which
+            case this property will return <c>false</c>, but individual actions
+            may report that they are deprecated.</remarks>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiDescriptionGroup.ApiDescriptions">
+            <summary>
+            Gets a collection of API descriptions for the current version.
+            </summary>
+            <value>A <see cref="T:System.Collections.ObjectModel.Collection`1">collection</see> of
+            <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">versioned API descriptions</see>.</value>
+        </member>
+        <member name="T:Microsoft.Web.Http.Description.ApiDescriptionGroupCollection">
+            <summary>
+            Represents a collection of grouped API descriptions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiDescriptionGroupCollection.GetKeyForItem(Microsoft.Web.Http.Description.ApiDescriptionGroup)">
+            <summary>
+            Gets the key for the specified item.
+            </summary>
+            <param name="item">The item to get the key for.</param>
+            <returns>The key of the item.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiDescriptionGroupCollection.GetOrAdd(Microsoft.Web.Http.ApiVersion)">
+            <summary>
+            Gets or adds a new API description group for the specified API version.
+            </summary>
+            <param name="apiVersion">The <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see> to get a description group for.</param>
+            <returns>A new or existing <see cref="T:Microsoft.Web.Http.Description.ApiDescriptionGroup">API description group</see>.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiDescriptionGroupCollection.GetOrAdd(Microsoft.Web.Http.ApiVersion,System.Func{Microsoft.Web.Http.ApiVersion,System.String})">
+            <summary>
+            Gets or adds a new API description group for the specified API version.
+            </summary>
+            <param name="apiVersion">The <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see> to get a description group for.</param>
+            <param name="formatName">The <see cref="T:System.Func`2">function</see> used to format the name of a new description group.</param>
+            <returns>A new or existing <see cref="T:Microsoft.Web.Http.Description.ApiDescriptionGroup">API description group</see>.</returns>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiDescriptionGroupCollection.ApiVersions">
+            <summary>
+            Gets a read-only collection of all of the API versions in the collection.
+            </summary>
+            <value>A <see cref="T:System.Collections.Generic.IReadOnlyList`1">read-only list</see> of <see cref="T:Microsoft.Web.Http.ApiVersion">API versions</see>.</value>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiDescriptionGroupCollection.Flatten">
+            <summary>
+            Transforms all of the groups in the collection to a flat list of API descriptions.
+            </summary>
+            <returns>A flat, <see cref="T:System.Collections.ObjectModel.Collection`1">collection</see> of <see cref="T:System.Web.Http.Description.ApiDescription">API descriptions</see>.</returns>
+        </member>
+        <member name="T:Microsoft.Web.Http.Description.ApiExplorerOptions">
+            <content>
+            Provides additional implementation specific to ASP.NET Web API.
+            </content>
+            <summary>
+            Represents the possible API versioning options for the API explorer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiExplorerOptions.#ctor(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Web.Http.Description.ApiExplorerOptions"/> class.
+            </summary>
+            <param name="configuration">The current <see cref="T:System.Web.Http.HttpConfiguration">configuration</see> associated with the options.</param>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiExplorerOptions.DefaultApiVersion">
+            <summary>
+            Gets the default API version applied to services that do not have explicit versions.
+            </summary>
+            <value>The default <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiExplorerOptions.AssumeDefaultVersionWhenUnspecified">
+            <summary>
+            Gets a value indicating whether a default version is assumed when a client does
+            does not provide a service API version.
+            </summary>
+            <value>True if the a default API version should be assumed when a client does not
+            provide a service API version; otherwise, false. The default value derives from
+            <see cref="P:Microsoft.Web.Http.Versioning.ApiVersioningOptions.AssumeDefaultVersionWhenUnspecified"/>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiExplorerOptions.ApiVersionParameterSource">
+            <summary>
+            Gets the source for defining API version parameters.
+            </summary>
+            <value>The <see cref="T:Microsoft.Web.Http.Versioning.IApiVersionParameterSource">API version parameter source</see> used to describe API version parameters.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiExplorerOptions.GroupNameFormat">
+            <summary>
+            Gets or sets the format used to create group names from API versions.
+            </summary>
+            <value>The string format used to format an <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see>
+            as a group name. The default value is <c>null</c>.</value>
+            <remarks>For information about API version formatting, review <see cref="T:Microsoft.Web.Http.Versioning.ApiVersionFormatProvider"/>
+            as well as the <see cref="M:Microsoft.Web.Http.ApiVersion.ToString(System.String)"/> and <see cref="M:Microsoft.Web.Http.ApiVersion.ToString(System.String,System.IFormatProvider)"/>
+            methods.</remarks>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiExplorerOptions.SubstitutionFormat">
+            <summary>
+            Gets or sets the format used to format the API version value substituted in route templates.
+            </summary>
+            <value>The string format used to format an <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see>
+            in a route template. The default value is "VVV", which formats the major version number
+            and optional minor version.</value>
+            <remarks>For information about API version formatting, review <see cref="T:Microsoft.Web.Http.Versioning.ApiVersionFormatProvider"/>
+            as well as the <see cref="M:Microsoft.Web.Http.ApiVersion.ToString(System.String)"/> and <see cref="M:Microsoft.Web.Http.ApiVersion.ToString(System.String,System.IFormatProvider)"/>
+            methods.</remarks>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiExplorerOptions.SubstituteApiVersionInUrl">
+            <summary>
+            Gets or sets a value indicating whether the API version parameter should be substituted in route templates.
+            </summary>
+            <value>True if the API version parameter should be substituted in route templates; otherwise, false.
+            The default value is <c>false</c>.</value>
+            <remarks>Setting this property to <c>true</c> will also remove the API version parameter from the
+            corresponding API description.</remarks>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiExplorerOptions.DefaultApiVersionParameterDescription">
+            <summary>
+            Gets or sets the default description used for API version parameters.
+            </summary>
+            <value>The default description for API version parameters. The default value
+            is "The requested API version".</value>
+        </member>
+        <member name="T:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext">
+            <summary>
+            Represents an object that contains API version parameter descriptions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.#ctor(System.Web.Http.Description.ApiDescription,Microsoft.Web.Http.ApiVersion,Microsoft.Web.Http.Description.ApiExplorerOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext"/> class.
+            </summary>
+            <param name="apiDescription">The <see cref="P:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.ApiDescription"/> to provide API version parameter descriptions for.</param>
+            <param name="apiVersion">The current API version.</param>
+            <param name="options">The configured <see cref="T:Microsoft.Web.Http.Description.ApiExplorerOptions">API explorer options</see>.</param>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.ApiDescription">
+            <summary>
+            Gets the associated API description.
+            </summary>
+            <value>The associated <see cref="P:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.ApiDescription">API description</see>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.ApiVersion">
+            <summary>
+            Gets the associated API version.
+            </summary>
+            <value>The associated <see cref="P:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.ApiVersion">API version</see>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.Options">
+            <summary>
+            Gets the options associated with the API explorer.
+            </summary>
+            <value>The configured <see cref="T:Microsoft.Web.Http.Description.ApiExplorerOptions">API explorer options</see>.</value>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.AddParameter(System.String,Microsoft.Web.Http.Versioning.ApiVersionParameterLocation)">
+            <summary>
+            Adds an API version parameter with the specified name, from the specified location.
+            </summary>
+            <param name="name">The name of the parameter.</param>
+            <param name="location">One of the <see cref="T:Microsoft.Web.Http.Versioning.ApiVersionParameterLocation"/> values.</param>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.AddQueryString(System.String)">
+            <summary>
+            Adds the description for an API version expressed as a query string parameter.
+            </summary>
+            <param name="name">The name of the query string parameter.</param>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.AddHeader(System.String)">
+            <summary>
+            Adds the description for an API version expressed as a header.
+            </summary>
+            <param name="name">The name of the header.</param>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.UpdateUrlSegment">
+            <summary>
+            Adds the description for an API version expressed as a header.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.ApiVersionParameterDescriptionContext.AddMediaTypeParameter(System.String)">
+            <summary>
+            Adds the description for an API version expressed as a media type parameter.
+            </summary>
+            <param name="name">The name of the media type parameter.</param>
+        </member>
+        <member name="T:Microsoft.Web.Http.Description.VersionedApiDescription">
+            <summary>
+            Represents a versioned API description.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.VersionedApiDescription.GroupName">
+            <summary>
+            Gets or sets the name of the group for the API description.
+            </summary>
+            <value>The API version description group name.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.VersionedApiDescription.ApiVersion">
+            <summary>
+            Gets or sets the API version.
+            </summary>
+            <value>The described <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.VersionedApiDescription.IsDeprecated">
+            <summary>
+            Gets or sets a value indicating whether API is deprecated.
+            </summary>
+            <value>True if the API is deprecated; otherwise, false. The default value is <c>false</c>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.VersionedApiDescription.ResponseDescription">
+            <summary>
+            Gets or sets the response description.
+            </summary>
+            <value>The <see cref="P:Microsoft.Web.Http.Description.VersionedApiDescription.ResponseDescription">response description</see>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.VersionedApiDescription.Properties">
+            <summary>
+            Gets arbitrary metadata properties associated with the API description.
+            </summary>
+            <value>A <see cref="T:System.Collections.Generic.IDictionary`2">collection</see> of arbitrary metadata properties
+            associated with the <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API description</see>.</value>
+        </member>
+        <member name="T:Microsoft.Web.Http.Description.VersionedApiExplorer">
+            <summary>
+            Explores the URI space of the versioned services based on routes, controllers and actions available in the system.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.#ctor(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Web.Http.Description.VersionedApiExplorer"/> class.
+            </summary>
+            <param name="configuration">The current <see cref="T:System.Web.Http.HttpConfiguration">HTTP configuration</see>.</param>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.#ctor(System.Web.Http.HttpConfiguration,Microsoft.Web.Http.Description.ApiExplorerOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Web.Http.Description.VersionedApiExplorer"/> class.
+            </summary>
+            <param name="configuration">The current <see cref="T:System.Web.Http.HttpConfiguration">HTTP configuration</see>.</param>
+            <param name="options">The associated <see cref="T:Microsoft.Web.Http.Description.ApiExplorerOptions">API explorer options</see>.</param>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.VersionedApiExplorer.Configuration">
+            <summary>
+            Gets the current configuration associated with the API explorer.
+            </summary>
+            <value>The current <see cref="T:System.Web.Http.HttpConfiguration">HTTP configuration</see>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.VersionedApiExplorer.Options">
+            <summary>
+            Gets the options associated with the API explorer.
+            </summary>
+            <value>The <see cref="T:Microsoft.Web.Http.Description.ApiExplorerOptions">API explorer options</see>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.VersionedApiExplorer.Comparer">
+            <summary>
+            Gets the comparer used to compare API descriptions.
+            </summary>
+            <value>A <see cref="T:Microsoft.Web.Http.Description.ApiDescriptionComparer">comparer</see> for <see cref="T:System.Web.Http.Description.ApiDescription">API descriptions</see>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.VersionedApiExplorer.RouteParser">
+            <summary>
+            Gets the object used to parse routes.
+            </summary>
+            <value>The configured <see cref="P:Microsoft.Web.Http.Description.VersionedApiExplorer.RouteParser">route parser</see>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.VersionedApiExplorer.ApiDescriptions">
+            <summary>
+            Gets a collection of descriptions grouped by API version.
+            </summary>
+            <value>An <see cref="T:Microsoft.Web.Http.Description.ApiDescriptionGroupCollection">API description group collection</see>.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Description.VersionedApiExplorer.DocumentationProvider">
+            <summary>
+            Gets or sets the documentation provider. The provider will be responsible for documenting the API.
+            </summary>
+            <value>The <see cref="T:System.Web.Http.Description.IDocumentationProvider">documentation provider</see> used to document APIs.</value>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.GetHttpMethodsSupportedByAction(System.Web.Http.Routing.IHttpRoute,System.Web.Http.Controllers.HttpActionDescriptor)">
+            <summary>
+            Gets a collection of HTTP methods supported by the action.
+            </summary>
+            <param name="route">The associated <see cref="T:System.Web.Http.Routing.IHttpRoute">route</see>.</param>
+            <param name="actionDescriptor">The <see cref="T:System.Web.Http.Controllers.HttpActionDescriptor">action descriptor</see> to get the HTTP methods for.</param>
+            <returns>A <see cref="T:System.Collections.ObjectModel.Collection`1">collection</see> of <see cref="T:System.Net.Http.HttpMethod">HTTP method</see>.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.ShouldExploreAction(System.String,System.Web.Http.Controllers.HttpActionDescriptor,System.Web.Http.Routing.IHttpRoute,Microsoft.Web.Http.ApiVersion)">
+            <summary>
+            Determines whether the action should be considered.
+            </summary>
+            <param name="actionRouteParameterValue">The action route parameter value.</param>
+            <param name="actionDescriptor">The associated <see cref="T:System.Web.Http.Controllers.HttpActionDescriptor">action descriptor</see>.</param>
+            <param name="route">The associated <see cref="T:System.Web.Http.Routing.IHttpRoute">route</see>.</param>
+            <param name="apiVersion">The <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see> to consider the controller for.</param>
+            <returns>True if the action should be explored; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.ShouldExploreController(System.String,System.Web.Http.Controllers.HttpControllerDescriptor,System.Web.Http.Routing.IHttpRoute,Microsoft.Web.Http.ApiVersion)">
+            <summary>
+            Determines whether the controller should be considered.
+            </summary>
+            <param name="controllerRouteParameterValue">The controller route parameter value.</param>
+            <param name="controllerDescriptor">The associated <see cref="T:System.Web.Http.Controllers.HttpControllerDescriptor">controller descriptor</see>.</param>
+            <param name="route">The associated <see cref="T:System.Web.Http.Routing.IHttpRoute">route</see>.</param>
+            <param name="apiVersion">The <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see> to consider the controller for.</param>
+            <returns>True if the controller should be explored; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.GetGroupName(Microsoft.Web.Http.ApiVersion)">
+            <summary>
+            Returns the group name for the specified API version.
+            </summary>
+            <param name="apiVersion">The <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see> to retrieve a group name for.</param>
+            <returns>The group name for the specified <paramref name="apiVersion">API version</paramref>.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.InitializeApiDescriptions">
+            <summary>
+            Initializes the API descriptions to explore.
+            </summary>
+            <returns>A new <see cref="T:Microsoft.Web.Http.Description.ApiDescriptionGroupCollection">collection</see> of
+            <see cref="T:Microsoft.Web.Http.Description.ApiDescriptionGroup">API description groups</see>.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.SortApiDescriptionGroup(Microsoft.Web.Http.Description.ApiDescriptionGroup)">
+            <summary>
+            Sorts the items in the API description group.
+            </summary>
+            <param name="apiDescriptionGroup">The <see cref="T:Microsoft.Web.Http.Description.ApiDescriptionGroup">group of API descriptions</see> to sort.</param>
+            <remarks>The default implementation sorts API descriptions by HTTP method, path, and API version.</remarks>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.TryExpandUriParameters(System.Web.Http.Routing.IHttpRoute,Microsoft.Web.Http.Routing.IParsedRoute,System.Collections.Generic.ICollection{System.Web.Http.Description.ApiParameterDescription},System.String@)">
+            <summary>
+            Attempts to expand the URI-based parameters for a given route and set of parameter descriptions.
+            </summary>
+            <param name="route">The <see cref="T:System.Web.Http.Routing.IHttpRoute">route</see> to expand.</param>
+            <param name="parsedRoute">The <see cref="T:Microsoft.Web.Http.Routing.IParsedRoute">parsed route</see> information.</param>
+            <param name="parameterDescriptions">The associated <see cref="T:System.Collections.Generic.ICollection`1">collection</see> of <see cref="T:System.Web.Http.Description.ApiParameterDescription">parameter descriptions</see>.</param>
+            <param name="expandedRouteTemplate">The expanded route template, if any.</param>
+            <returns>True if the operation succeeded; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.ExploreDirectRouteControllers(System.Web.Http.Controllers.HttpControllerDescriptor,System.Collections.Generic.IReadOnlyList{System.Web.Http.Controllers.HttpActionDescriptor},System.Web.Http.Routing.IHttpRoute,Microsoft.Web.Http.ApiVersion)">
+            <summary>
+            Explores a controller that uses direct routes (aka "attribute" routing).
+            </summary>
+            <param name="controllerDescriptor">The <see cref="T:System.Web.Http.Controllers.HttpControllerDescriptor">controller</see> to explore.</param>
+            <param name="candidateActionDescriptors">The <see cref="T:System.Collections.Generic.IReadOnlyList`1">read-only list</see> of candidate <see cref="T:System.Web.Http.Controllers.HttpActionDescriptor">actions</see> to explore.</param>
+            <param name="route">The <see cref="T:System.Web.Http.Routing.IHttpRoute">route</see> to explore.</param>
+            <param name="apiVersion">The <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see> to explore.</param>
+            <returns>The <see cref="T:System.Collections.ObjectModel.Collection`1">collection</see> of discovered <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API descriptions</see>.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.ExploreRouteControllers(System.Collections.Generic.IDictionary{System.String,System.Web.Http.Controllers.HttpControllerDescriptor},System.Web.Http.Routing.IHttpRoute,Microsoft.Web.Http.ApiVersion)">
+            <summary>
+            Explores controllers that do not use direct routes (aka "attribute" routing)
+            </summary>
+            <param name="controllerMappings">The <see cref="T:System.Collections.Generic.IDictionary`2">collection</see> of controller mappings.</param>
+            <param name="route">The <see cref="T:System.Web.Http.Routing.IHttpRoute">route</see> to explore.</param>
+            <param name="apiVersion">The <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see> to explore.</param>
+            <returns>The <see cref="T:System.Collections.ObjectModel.Collection`1">collection</see> of discovered <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API descriptions</see>.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.PopulateApiVersionParameters(System.Web.Http.Description.ApiDescription,Microsoft.Web.Http.ApiVersion)">
+            <summary>
+            Populates the API version parameters for the specified API description.
+            </summary>
+            <param name="apiDescription">The <see cref="T:System.Web.Http.Description.ApiDescription">API description</see> to populate parameters for.</param>
+            <param name="apiVersion">The <see cref="T:Microsoft.Web.Http.ApiVersion">API version</see> used to populate parameters with.</param>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.CreateResponseDescription(System.Web.Http.Controllers.HttpActionDescriptor)">
+            <summary>
+            Creates a description for the response of the action.
+            </summary>
+            <param name="actionDescriptor">The <see cref="T:System.Web.Http.Controllers.HttpActionDescriptor">action</see> to create a response description for.</param>
+            <returns>A new <see cref="T:System.Web.Http.Description.ResponseDescription">response description</see>.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Description.VersionedApiExplorer.CreateParameterDescription(System.Web.Http.Controllers.HttpParameterDescriptor)">
+            <summary>
+            Creates a parameter description from the speicfied descriptor.
+            </summary>
+            <param name="parameterDescriptor">The <see cref="T:System.Web.Http.Controllers.HttpParameterDescriptor">parameter descriptor</see> to create a description from.</param>
+            <returns>A new <see cref="T:System.Web.Http.Description.ApiParameterDescription">parameter description</see>.</returns>
+        </member>
+        <member name="T:Microsoft.Web.Http.LocalSR">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Web.Http.LocalSR.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Web.Http.LocalSR.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Web.Http.LocalSR.DefaultApiVersionParamDesc">
+            <summary>
+              Looks up a localized string similar to The requested API version.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Web.Http.LocalSR.MediaTypeFormatterNotCloneable">
+            <summary>
+              Looks up a localized string similar to The media type formatter {0} could not be cloned. The type must either implement {1}, define a copy constructor with the signature &apos;{0}({0} formatter)&apos;, or have a parameterless constructor..
+            </summary>
+        </member>
+        <member name="T:Microsoft.Web.Http.Routing.IBoundRouteTemplate">
+            <summary>
+            Defines the behavior of a bound route template.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Web.Http.Routing.IBoundRouteTemplate.BoundTemplate">
+            <summary>
+            Gets or sets the build template.
+            </summary>
+            <value>The bound template.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Routing.IBoundRouteTemplate.Values">
+            <summary>
+            Gets or sets the template parameter values.
+            </summary>
+            <value>The template <see cref="T:System.Web.Http.Routing.HttpRouteValueDictionary">route value dictionary</see>.</value>
+        </member>
+        <member name="T:Microsoft.Web.Http.Routing.IParsedRoute">
+            <summary>
+            Defines the behavior of a parsed route.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Web.Http.Routing.IParsedRoute.Bind(System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Http.Routing.HttpRouteValueDictionary,System.Web.Http.Routing.HttpRouteValueDictionary)">
+            <summary>
+            Binds the route using the specified values and constraints.
+            </summary>
+            <param name="currentValues">The current <see cref="T:System.Collections.Generic.IDictionary`2">collection</see> of values.</param>
+            <param name="values">The current <see cref="T:System.Collections.Generic.IDictionary`2">collection</see> to bind.</param>
+            <param name="defaultValues">The <see cref="T:System.Web.Http.Routing.HttpRouteValueDictionary">dictionary</see> of default values.</param>
+            <param name="constraints">The <see cref="T:System.Web.Http.Routing.HttpRouteValueDictionary">dictionary</see> of constraints.</param>
+            <returns>A new <see cref="T:Microsoft.Web.Http.Routing.IBoundRouteTemplate">bound route template</see>.</returns>
+        </member>
+        <member name="P:Microsoft.Web.Http.Routing.IParsedRoute.PathSegments">
+            <summary>
+            Gets the path segments associated with the parsed route.
+            </summary>
+            <value>A <see cref="T:System.Collections.Generic.IReadOnlyList`1">read-only list</see> of <see cref="T:Microsoft.Web.Http.Routing.IPathSegment">path segments</see>.</value>
+        </member>
+        <member name="T:Microsoft.Web.Http.Routing.IPathContentSegment">
+            <summary>
+            Defines the behavior of a path content segment.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Web.Http.Routing.IPathContentSegment.IsCatchAll">
+            <summary>
+            Gets a value indicating whether the segment represents a "catch all".
+            </summary>
+            <value>True if the segment represents a "catch all" (*); otherwise, false.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Routing.IPathContentSegment.Subsegments">
+            <summary>
+            Gets a read-only list of subsegments.
+            </summary>
+            <value>A <see cref="T:System.Collections.Generic.IReadOnlyList`1">read-only list</see> of <see cref="T:Microsoft.Web.Http.Routing.IPathSubsegment">subsegments</see>.</value>
+        </member>
+        <member name="T:Microsoft.Web.Http.Routing.IPathLiteralSubsegment">
+            <summary>
+            Defines the behavior of a a literal segment.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Web.Http.Routing.IPathLiteralSubsegment.Literal">
+            <summary>
+            Gets the literal subsegment value.
+            </summary>
+            <value>The literal subsegment value.</value>
+        </member>
+        <member name="T:Microsoft.Web.Http.Routing.IPathParameterSubsegment">
+            <summary>
+            Defines the behavior of a parameter subsegment.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Web.Http.Routing.IPathParameterSubsegment.IsCatchAll">
+            <summary>
+            Gets a value indicating whether the segment represents a "catch all".
+            </summary>
+            <value>True if the segment represents a "catch all" (*); otherwise, false.</value>
+        </member>
+        <member name="P:Microsoft.Web.Http.Routing.IPathParameterSubsegment.ParameterName">
+            <summary>
+            Gets the corresponding parameter name.
+            </summary>
+            <value>The corresponding segment parameter name.</value>
+        </member>
+        <member name="T:Microsoft.Web.Http.Routing.IPathSegment">
+            <summary>
+            Defines the behavior of a path segment.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Web.Http.Routing.IPathSeparatorSegment">
+            <summary>
+            Defines the behavior of a path separator.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Web.Http.Routing.IPathSubsegment">
+            <summary>
+            Defines the behavior of a path subsegment.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Web.Http.Routing.RouteParser">
+            <summary>
+            Defines the behavior of a route parser.
+            </summary>
+            <remarks>This class serves as an adapter over the built-in ASP.NET Web API RouteParser class and
+            enables the ability to override the behavior of parsing a route.</remarks>
+        </member>
+        <member name="M:Microsoft.Web.Http.Routing.RouteParser.CreateNew">
+            <summary>
+            Creates a new, parsed route.
+            </summary>
+            <returns>A new, <see cref="T:Microsoft.Web.Http.Routing.IParsedRoute">parsed route</see>.</returns>
+        </member>
+        <member name="M:Microsoft.Web.Http.Routing.RouteParser.Parse(System.String)">
+            <summary>
+            Parses the specified route template.
+            </summary>
+            <param name="routeTemplate">The route template to parse.</param>
+            <returns>A <see cref="T:Microsoft.Web.Http.Routing.IParsedRoute">parsed route</see>.</returns>
+        </member>
+        <member name="T:System.Web.Http.Description.ApiDescriptionExtensions">
+            <summary>
+            Provides extension methods for the <see cref="T:System.Web.Http.Description.ApiDescription"/> class.
+            </summary>
+        </member>
+        <member name="M:System.Web.Http.Description.ApiDescriptionExtensions.GetGroupName(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the group name associated with the API description.
+            </summary>
+            <param name="apiDescription">The <see cref="T:System.Web.Http.Description.ApiDescription">API description</see> to get the group name for.</param>
+            <returns>The associated group name or <c>null</c>.</returns>
+            <remarks>This method always returns <c>null</c> unless the <paramref name="apiDescription">API description</paramref>
+            is of type <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription"/>.</remarks>
+        </member>
+        <member name="M:System.Web.Http.Description.ApiDescriptionExtensions.GetUniqueID(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the unique API description identifier.
+            </summary>
+            <param name="apiDescription">The <see cref="T:System.Web.Http.Description.ApiDescription">API description</see> to get the unique identifier for.</param>
+            <returns>The unique identifier of the API description.</returns>
+            <remarks>If the <paramref name="apiDescription">API description</paramref> is of type <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription"/>
+            the return value will be in the format of "{<see cref="P:System.Web.Http.Description.ApiDescription.ID"/>}-{<see cref="P:Microsoft.Web.Http.Description.VersionedApiDescription.ApiVersion"/>}";
+            otherwise, the return value will be "{<see cref="P:System.Web.Http.Description.ApiDescription.ID"/>}".</remarks>
+        </member>
+        <member name="M:System.Web.Http.Description.ApiDescriptionExtensions.GetProperty``1(Microsoft.Web.Http.Description.VersionedApiDescription)">
+            <summary>
+            Gets a property of the specified type from the API description.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type">type</see> of property to retrieve.</typeparam>
+            <param name="apiDescription">The <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API description</see> to get the property from.</param>
+            <returns>The value of the property, if present; otherwise, the default value of <typeparamref name="T"/>.</returns>
+        </member>
+        <member name="M:System.Web.Http.Description.ApiDescriptionExtensions.SetProperty``1(Microsoft.Web.Http.Description.VersionedApiDescription,``0)">
+            <summary>
+            Sets a property of the specified type on the API description.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type">type</see> of property to set.</typeparam>
+            <param name="apiDescription">The <see cref="T:Microsoft.Web.Http.Description.VersionedApiDescription">API description</see> to set the property on.</param>
+            <param name="value">The value to add or update.</param>
+        </member>
+        <member name="T:System.Web.Http.HttpConfigurationExtensions">
+            <summary>
+            Provides extension methods for the <see cref="T:System.Web.Http.HttpConfiguration"/> class.
+            </summary>
+        </member>
+        <member name="M:System.Web.Http.HttpConfigurationExtensions.AddVersionedApiExplorer(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Adds or replaces the configured <see cref="T:System.Web.Http.Description.IApiExplorer">API explorer</see> with an implementation that supports API versioning.
+            </summary>
+            <param name="configuration">The <see cref="T:System.Web.Http.HttpConfiguration">configuration</see> used to add the API explorer.</param>
+            <returns>The newly registered <see cref="T:Microsoft.Web.Http.Description.VersionedApiExplorer">versioned API explorer</see>.</returns>
+            <remarks>This method always replaces the <see cref="T:System.Web.Http.Description.IApiExplorer"/> with a new instance of <see cref="T:Microsoft.Web.Http.Description.VersionedApiExplorer"/>.</remarks>
+        </member>
+        <member name="M:System.Web.Http.HttpConfigurationExtensions.AddVersionedApiExplorer(System.Web.Http.HttpConfiguration,System.Action{Microsoft.Web.Http.Description.ApiExplorerOptions})">
+            <summary>
+            Adds or replaces the configured <see cref="T:System.Web.Http.Description.IApiExplorer">API explorer</see> with an implementation that supports API versioning.
+            </summary>
+            <param name="configuration">The <see cref="T:System.Web.Http.HttpConfiguration">configuration</see> used to add the API explorer.</param>
+            <param name="setupAction">An <see cref="T:System.Action`1">action</see> used to configure the provided options.</param>
+            <returns>The newly registered <see cref="T:Microsoft.Web.Http.Description.VersionedApiExplorer">versioned API explorer</see>.</returns>
+            <remarks>This method always replaces the <see cref="T:System.Web.Http.Description.IApiExplorer"/> with a new instance of <see cref="T:Microsoft.Web.Http.Description.VersionedApiExplorer"/>.</remarks>
+        </member>
+        <member name="T:System.Web.Http.MediaTypeFormatterAdapterFactory.SupportedMediaTypesInitializer">
+            <summary>
+            Supports cloning with a copy constructor.
+            </summary>
+            <remarks>
+            The <see cref="T:System.Net.Http.Formatting.MediaTypeFormatter"/> copy constructor does not clone the SupportedMediaTypes property or backing field.
+            <seealso href="https://github.com/ASP-NET-MVC/aspnetwebstack/blob/4e40cdef9c8a8226685f95ef03b746bc8322aa92/src/System.Net.Http.Formatting/Formatting/MediaTypeFormatter.cs#L62"/>
+            </remarks>
+        </member>
+    </members>
+</doc>
