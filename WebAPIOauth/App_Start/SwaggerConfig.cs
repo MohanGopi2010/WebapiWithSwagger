@@ -76,13 +76,13 @@ namespace WebAPIOauth
 
 
                       c.OperationFilter<AssignOAuth2SecurityRequirements>();
-                       
+
                   })
                 .EnableSwaggerUi(c =>
-                    { 
+                    {
                         c.DocumentTitle("My Swagger UI");
-                        c.DocExpansion(DocExpansion.Full); 
-                       
+                        c.DocExpansion(DocExpansion.Full);
+
                         //  c.InjectJavaScript(thisAssembly, "WebAPIOauth.swaggerext.onComplete.js");
 
                         //c.EnableOAuth2Support(
@@ -99,12 +99,12 @@ namespace WebAPIOauth
 
 
 
-    
+
         private static string GetXmlCommentsPath()
         {
             return string.Format(@"{0}\bin\WebAPIOauth.xml", AppDomain.CurrentDomain.BaseDirectory);
         }
-    } 
+    }
 
     internal class AssignOAuth2SecurityRequirements : IOperationFilter
     {
