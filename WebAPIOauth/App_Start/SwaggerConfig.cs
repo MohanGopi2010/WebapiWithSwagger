@@ -30,9 +30,6 @@ namespace WebAPIOauth
                     options.SubstituteApiVersionInUrl = true;
                 });
 
-            //System.Diagnostics.Debugger.Break();
-
-            //var baseURL = UriPartial.Authority;
 
             config
 
@@ -74,14 +71,15 @@ namespace WebAPIOauth
 
                       c.DescribeAllEnumsAsStrings();
 
-
                       c.OperationFilter<AssignOAuth2SecurityRequirements>();
+                    //  c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                     
 
                   })
                 .EnableSwaggerUi(c =>
                     {
                         c.DocumentTitle("My Swagger UI");
-                        c.DocExpansion(DocExpansion.Full);
+                      //  c.DocExpansion(DocExpansion.Full);
 
                         //  c.InjectJavaScript(thisAssembly, "WebAPIOauth.swaggerext.onComplete.js");
 
@@ -126,13 +124,15 @@ namespace WebAPIOauth
                         if (parameter.description == null)
                         {
                             parameter.description = description.Documentation;
-                        }
-
+                        } 
                         if (parameter.@default == null)
                         {
                             parameter.@default = description.ParameterDescriptor?.DefaultValue;
-                        }
+                        } 
+
                     }
+
+
                 }
             }
 
@@ -142,21 +142,21 @@ namespace WebAPIOauth
             // Determine if the operation has the Authorize attribute
             var authorizeAttributes = apiDescription.ActionDescriptor.GetCustomAttributes<AuthorizeAttribute>();
 
-            if (authorizeAttributes.Any())
-            {
+            //if (authorizeAttributes.Any())
+            //{
 
-                // Initialize the operation.security property
-                if (operation.security == null)
-                    operation.security = new List<IDictionary<string, IEnumerable<string>>>();
+            // Initialize the operation.security property
+            if (operation.security == null)
+                operation.security = new List<IDictionary<string, IEnumerable<string>>>();
 
-                // Add the appropriate security definition to the operation
-                var oAuthRequirements = new Dictionary<string, IEnumerable<string>>
+            // Add the appropriate security definition to the operation
+            var oAuthRequirements = new Dictionary<string, IEnumerable<string>>
             {
                 { "oauth2", Enumerable.Empty<string>() }
             };
 
-                operation.security.Add(oAuthRequirements);
-            }
+            operation.security.Add(oAuthRequirements);
+            // }
 
 
         }

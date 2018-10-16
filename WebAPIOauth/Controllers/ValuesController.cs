@@ -1,4 +1,5 @@
 ﻿using Microsoft.Web.Http;
+using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,23 @@ namespace WebAPIOauth.Controllers
         [ResponseType(typeof(string[]))]
         [Authorize]
         public IEnumerable<string> Get()
+        {
+
+
+            return new string[] { "version Default", "version Default " };
+        }
+
+        /// <summary>
+        /// Get all values with 3 optional parameter
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="password"></param>
+        /// <param name="fn"></param>
+        /// <returns></returns>
+        [Route("{name}/{password}")]
+        [HttpGet]
+        [ResponseType(typeof(string[]))]
+        public IEnumerable<string> Get(string name, string password, string fn = "sad")
         {
 
 
