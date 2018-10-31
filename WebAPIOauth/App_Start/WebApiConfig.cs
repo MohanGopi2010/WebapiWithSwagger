@@ -31,7 +31,7 @@ namespace WebAPIOauth
                 //  options.ApiVersionReader = new HeaderApiVersionReader("apiVersion");
                 options.ApiVersionReader = new UrlSegmentApiVersionReader();
 
-                // options.DefaultApiVersion = new Microsoft.Web.Http.ApiVersion(2,0);
+               // options.DefaultApiVersion = new Microsoft.Web.Http.ApiVersion(1, 0);
                 options.ErrorResponses = new VersionErrorResponseProvider();
 
 
@@ -40,28 +40,24 @@ namespace WebAPIOauth
             }
             );
 
-            //config.AddVersionedApiExplorer(expOptions => { expOptions. }
-            //);
-
-
-
-
 
             config.MapHttpAttributeRoutes(constraintResolver);
-             
+
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
+                routeTemplate: "api/v{apiversion}/{controller}/{id}",
                 defaults: new
                 {
                     id = RouteParameter.Optional
-                }
+                },
+            constraints: new { apiVersion = new ApiVersionRouteConstraint() }
             );
+
 
             SwaggerConfig.Register(config);
 
-        } 
+        }
     }
 
     public class VersionErrorResponseProvider : DefaultErrorResponseProvider

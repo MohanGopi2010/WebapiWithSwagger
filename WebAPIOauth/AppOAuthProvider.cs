@@ -70,8 +70,9 @@ namespace WebAPIOauth
                 // Initialization.  
                 var claims = new List<Claim>();
 
-                // Setting  
-                claims.Add(new Claim("Name", "Mohan G"));
+            // Setting claims  
+            claims.Add(new Claim("ID", "1"));
+            claims.Add(new Claim("Name", "Mohan G"));
 
                 // Setting Claim Identities for OAUTH 2 protocol.  
                 ClaimsIdentity oAuthClaimIdentity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
